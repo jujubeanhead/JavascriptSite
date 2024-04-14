@@ -1,53 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>menu items</title>
-	  
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-      <!-- bootstrap, need to use https for these links -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-      
-      <style> .btn{margin: 5px} </style>
+    <meta charset="utf-8">
+    <title>Project 5</title>
   </head>
-  <body>
-  
-      <div class="container">
-         <h2>Select a Menu</h2>
-      
-         <div style='padding: 5px;'>    
-            <button type='button' class="btn btn-primary" onClick="getData('breakfast')">Breakfast</button> 
-            <button type='button' class="btn btn-primary" onClick="getData('lunch')">Lunch</button> 
-            <button type='button' class="btn btn-primary" onClick="getData('dinner')">Dinner</button> 
-         </div>
-      
-  
-         <h3>Filter dataset by meal</h3>
-         <div id="menuTable"></div>
-                
-      
-            <p>Menu Data originally provided by  <a href='https://manual.cs50.net/api/food/'>manual.cs50.net/api/food/</a></p>
-		      <p>Menu items were originally from the Harvard University Dining Services. The above link is very old, and no longer leads to information on the food API, and I can find no updated information on attribution.</p>
-            <p>CS 50 is a popular intro to computer science course offered by Harvard University.</p>       
-     
-     </div>   <!-- end class='container'   -->
+  <body style='margin-left: 30px;'>
 
-  <!-- Handlebars template -->
-<script type="text/x-handlebars-template" id="menuTemplate">
+    <h1>Select a Major</h1>
+    <input type="button" name="btn1" value="CIT Majors">
+    <input type="button" name="btn2" value="Business Majors">
+    <h2>We filter our dataset by major</h2>
+  </body>
 
-   <table class="table table-striped">
-      <tr><th>Item</th><th>Meal</th><th>Category</th><th>Portion</th></tr>
-      {{#each rows}}
-         <tr>
-            <td>{{name}}</td><td>{{meal}}</td><td>{{category}}</td><td>{{portion}}</td>
-         </tr>
-      {{/each}}
-   </table>
-</script>
-  
-<script src = 'app.js'></script>   <!-- application ajax code -->
+  <script>
 
-</body></html>
+      document.addEventListener('DOMContentLoaded', function() {
+
+      	document.querySelector('#btn').onclick = async function(){
+  			var response = await fetch('cit5students.json');       
+
+  			if(response.ok) {
+  				var data = await response.json();
+
+
+  				var tableContents = "<table cellspacing='5'>"
+  				tableContents += "<tr><td>Name</td><td>Midterm</td><td>Final</td></tr>";
+
+              	for(i = 0; i < data.length; i++) {
+                      tableContents += `<tr><td> ${data[i].name} </td>
+  						<td> ${data[i].midterm} </td>
+  						<td> ${data[i].final} </td></tr>`;  // generate table using template literals
+                  }
+
+                  tableContents += "</table>";
+
+                  document.querySelector('#result').innerHTML = tableContents;
+  			}
+  			else {
+  				document.querySelector('#result').innerHTML = "Data not found";
+  			}
+      	};
+
+    	});
+
+  </script>
+
+
+
+</html>
