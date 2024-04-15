@@ -4,17 +4,16 @@ async function getData(selected_major) {
     if(response.ok) {
         var data = await response.json();
 
+        // Filter data by selected major
+        var major_items = data.filter(item => item.major === selected_major);
 
-        major_items = data.filter( (item) => item.name == this.selected_major );
+        var templateText = document.getElementById('majorTemplate').innerHTML;
+        var compiledTemplate = Handlebars.compile(templateText);
 
-       var templateText = document.getElementById('majorTemplate').innerHTML;
-       var compiledTemplateText = Handlebars.compile(templateText);
-
-       compiledHtml = compiledTemplateText({ rows: major_items })      
-       document.getElementById('majorTable').innerHTML = compiledHtml;
+        var compiledHtml = compiledTemplate({ rows: major_items });
+        document.getElementById('majorTable').innerHTML = compiledHtml;
     }
     else {
-       document.querySelector('#majorTable').innerHTML = "There was an error, or menu items not found";
+        document.getElementById('majorTable').innerHTML = "There was an error, or menu items not found";
     }
-
 }
