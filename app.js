@@ -6,6 +6,9 @@ async function getData(selected_major) {
 
         // Filter data by selected major
         var major_items = data.filter(item => item.major === selected_major);
+        
+        // log filtered data
+        console.log("Filtered Data:", major_items);
 
         var templateText = document.getElementById('majorTemplate').innerHTML;
         var compiledTemplate = Handlebars.compile(templateText);
