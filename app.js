@@ -1,4 +1,4 @@
-async function getData(selectedMajor) {
+async function getData(selected_major) {
     var response = await fetch('cit5students.json');   // this is a GET request
 
     if(response.ok) {
