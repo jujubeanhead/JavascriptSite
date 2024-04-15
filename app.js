@@ -1,15 +1,16 @@
 async function getData(selected_major) {
-    var response = await fetch('cit5students.json');   // this is a GET request
+    var response = await fetch('cit5students.json');   // GET request
 
     if(response.ok) {
         var data = await response.json();
 
-        // filter data array for the selected meal
-        major_items = data.filter( (item) => item.name == selected_major );
+
+        major_items = data.filter( (item) => item.name == this.selected_major );
 
        var templateText = document.getElementById('majorTemplate').innerHTML;
-       var compiledTemplateText = Handlebars.compile(templateText);   // get and compile template code
-       compiledHtml = compiledTemplateText({ rows: major_items })      // apply data to template
+       var compiledTemplateText = Handlebars.compile(templateText);
+
+       compiledHtml = compiledTemplateText({ rows: major_items })      
        document.getElementById('majorTable').innerHTML = compiledHtml;
     }
     else {
