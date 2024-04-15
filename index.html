@@ -5,23 +5,7 @@
     <title>Project 5</title>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
 
-      <script id="chart" type="text/x-handlebars-template" id="majorTemplate">
-      </script>
 
-      <!-- declare handlebars -->
-
-
-      <table class="table table-striped">
-         <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
-         {{#each rows}}
-            <tr>
-               <td>{{name}}</td><td>{{major}}</td><td>{{midterm}}</td><td>{{final}}</td>
-            </tr>
-         {{/each}}
-      </table>
-   </script>
-
-   <!-- handlebars template -->
 
 
   </head>
@@ -42,6 +26,26 @@
   </body>
 
   <!-- html displayed stuff -->
+
+
+
+
+  <script id="chart" type="text/x-handlebars-template" id="majorTemplate">
+
+  <!-- declare handlebars -->
+
+
+  <table class="table table-striped">
+     <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
+     {{#each rows}}
+        <tr>
+           <td>{{name}}</td><td>{{major}}</td><td>{{midterm}}</td><td>{{final}}</td>
+        </tr>
+     {{/each}}
+  </table>
+</script>
+
+<!-- handlebars template -->
 
 <script>
 async function getData(selectedMajor) {
